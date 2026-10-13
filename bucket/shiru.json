@@ -1,10 +1,10 @@
 {
-    "version": "6.9.0",
+    "version": "6.9.1",
     "description": "Stream anime torrents, real-time with no waiting for downloads",
     "homepage": "https://github.com/rockinchaos/shiru",
     "license": "GPL-3.0-only",
-    "url": "https://github.com/RockinChaos/Shiru/releases/download/v6.9.0/win-Shiru-v6.9.0-portable.exe#/Shiru.exe",
-    "hash": "be79acf169a725b52a99590d0466e0f07d044ca4d16eaa3ead6389fc689c2ea6",
+    "url": "https://github.com/RockinChaos/Shiru/releases/download/v6.9.1/win-Shiru-v6.9.1-portable.exe#/Shiru.exe",
+    "hash": "052b0e85a20c970b61a278634b72766b55eec89ad48ea8a29b63951b24bdd592",
     "shortcuts": [
         [
             "Shiru.exe",
