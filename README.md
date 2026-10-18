@@ -1,4 +1,4 @@
-# weeboop [![Tests](https://github.com/PrantoSMSS/weeboop/actions/workflows/ci.yml/badge.svg)](https://github.com/PrantoSMSS/weeboop/actions/workflows/ci.yml) [![Excavator](https://github.com/PrantoSMSS/weeboop/actions/workflows/excavator.yml/badge.svg)](https://github.com/PrantoSMSS/weeboop/actions/workflows/excavator.yml)
+# Pencil [![Tests](https://github.com/PrantoSMSS/Pencil/actions/workflows/ci.yml/badge.svg)](https://github.com/PrantoSMSS/Pencil/actions/workflows/ci.yml) [![Excavator](https://github.com/PrantoSMSS/Pencil/actions/workflows/excavator.yml/badge.svg)](https://github.com/PrantoSMSS/Pencil/actions/workflows/excavator.yml)
 
 A [Scoop](https://scoop.sh) bucket focused on accumulating all the weeb, otaku, geek and nerd based applications. It is a fork of [Rinkerbel/scooped](https://github.com/Rinkerbel/scooped).
 
@@ -8,8 +8,12 @@ After installing [Scoop](https://scoop.sh/), enter the following line in a
 Command Prompt or PowerShell window:
 
 ```powershell
-scoop bucket add weeboop https://github.com/PrantoSMSS/weeboop
+scoop bucket add pencil https://github.com/PrantoSMSS/Pencil
 ```
+
+> **Note:** This bucket was renamed from `weeboop` to `pencil`. If you added it
+> under the old name, run `scoop bucket rm weeboop` and re-add it with
+> `scoop bucket add pencil https://github.com/PrantoSMSS/Pencil`.
 
 Once this is done, you can install any app from this bucket.\
 For instance, use the following command:
@@ -20,7 +24,7 @@ scoop install unyo
 
 ## List of applications in this bucket
 
-> Click here to [browse the list on scoop instead](https://scoop.sh/#/apps?q="https://github.com/PrantoSMSS/weeboop"&o=false)
+> Click here to [browse the list on scoop instead](https://scoop.sh/#/apps?q="https://github.com/PrantoSMSS/Pencil"&o=false)
 
 ### ![Anime, Manga & Comics](https://img.shields.io/badge/Anime%2C%20Manga%20%26%20Comics-ff69b4)
 
@@ -64,7 +68,6 @@ scoop install unyo
 
 | App | Purpose |
 | --- | --- |
-| [Audacity (legacy 2.4.1) ⭐](https://www.audacityteam.org) | Free, open-source, cross-platform audio software for multi-track recording and editing |
 | [fooyin ⭐](https://fooyin.org/) | Customisable music player |
 | [qmmp ⭐](http://qmmp.ylsoftware.com/) | Qt-based multimedia player with Winamp-style interface |
 | [spleeter-gui ⭐](https://makenweb.com/SpleeterGUI) | Desktop app for music source separation |
@@ -88,6 +91,7 @@ scoop install unyo
 | [opal](https://codedead.com/software/opal) | Plays relaxing background music |
 | [psst](https://github.com/jpochyla/psst) | Fast Spotify client with a native GUI |
 | [rspleeter](https://github.com/ldm0/rspleeter) | Rust port of Spleeter for music source separation |
+| [rustacity](https://github.com/prantosmss/Rustacity) | Audacity 2.4.1 fork with a Rust-based DSP core and extension engine; multi-track audio editor and recorder |
 | [showmidi](https://github.com/gbevin/ShowMIDI) | Visualizes MIDI events from any connected device |
 | [simpmusic](https://github.com/maxrave-dev/SimpMusic) | Cross-platform music app using YouTube Music as backend |
 | [spotatui](https://github.com/LargeModGames/spotatui) | Fully standalone Spotify client for the terminal |
