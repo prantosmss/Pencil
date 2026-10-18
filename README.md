@@ -9,7 +9,7 @@
 [![Tests](https://github.com/prantosmss/Pencil/actions/workflows/ci.yml/badge.svg)](https://github.com/prantosmss/Pencil/actions/workflows/ci.yml)
 [![Excavator](https://github.com/prantosmss/Pencil/actions/workflows/excavator.yml/badge.svg)](https://github.com/prantosmss/Pencil/actions/workflows/excavator.yml)
 [![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](LICENSE)
-[![Scoop](https://img.shields.io/badge/Scoop-bucket-ff69b4.svg)](https://scoop.sh)
+[![Scoop](https://img.shields.io/badge/Scoop-bucket-ff69b4.svg)](https://scoop.sh/#/apps?q=%22https://github.com/prantosmss/Pencil%22&o=false)
 
 [Quick start](#-quick-start) · [Browse apps](https://prantosmss.github.io/Pencil/) · [Browse on scoop.sh](https://scoop.sh/#/apps?q=%22https://github.com/prantosmss/Pencil%22&o=false)
 
