@@ -283,19 +283,19 @@ Apps marked with ⭐ are the headline picks of each category.
 | [simulide](https://simulide.com/) | Simple real-time electronic circuit simulator |
 
 ## Footnotes
- 
+
 [^1]: Previously known as Miru.
- 
+
 [^2]: Requires a Java Runtime Environment 21 or newer (JRE 21+) installed on the system to run.
- 
+
 [^3]: Some antivirus engines flag the installer's temp file as a false-positive trojan. This is a known false positive caused by Textractor's core function: injecting into game processes to hook text output.
- 
+
 [^4]: Runs from the system tray. Right-click the tray icon to open settings, reselect the scan region, or change the OCR provider.
- 
+
 [^5]: Requires the .NET 8 Desktop Runtime to run.
- 
+
 [^6]: Animeko is NOT portable. Settings are stored in `%APPDATA%\Him188\Ani`, and will be purged during uninstallation.
- 
+
 [^7]: Requires Python. After installing, navigate to the app directory (`scoop prefix TwitchChannelPointsMiner`) and run `pip install -r requirements.txt`, then configure `run.py` before running.
 
 ---
