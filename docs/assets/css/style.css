@@ -634,66 +634,23 @@ main {
     color: var(--pink);
 }
 
-/* ---------- Install popover ---------- */
+/* ---------- Inline install command ---------- */
 
-.install-popover {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 50;
-    width: min(390px, calc(100vw - 24px));
-    padding: 16px;
-    background: var(--panel-solid);
-    border: 1px solid var(--border-strong);
-    border-radius: var(--radius-sm);
-    box-shadow: 0 26px 70px -24px rgba(0, 0, 0, 1);
-}
-
-.install-popover[hidden] {
+.card__install-panel {
     display: none;
 }
 
-.install-popover__head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
+.card.is-selected .card__install-panel {
+    display: block;
 }
 
-.install-popover__title {
-    margin: 0;
-    font-size: 1rem;
-    font-weight: 700;
-    word-break: break-word;
-}
-
-.install-popover__close {
-    flex: none;
-    width: 28px;
-    height: 28px;
-    padding: 0;
-    font: inherit;
-    font-size: 1.25rem;
-    line-height: 1;
-    color: var(--muted);
-    background: transparent;
-    border: 1px solid transparent;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.install-popover__close:hover {
-    color: var(--text);
-    border-color: var(--border-strong);
-}
-
-.install-popover__hint {
-    margin: 6px 0 10px;
-    font-size: 0.82rem;
+.card__install-hint {
+    margin: 0 0 8px;
+    font-size: 0.78rem;
     color: var(--faint);
 }
 
-.install-popover__cmd {
+.card__install-cmd {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -703,21 +660,21 @@ main {
     border-radius: 10px;
 }
 
-.install-popover__cmd code {
+.card__install-cmd code {
     flex: 1 1 auto;
     min-width: 0;
     overflow-x: auto;
     font-family: "Cascadia Code", "Consolas", ui-monospace, monospace;
-    font-size: 0.86rem;
+    font-size: 0.84rem;
     white-space: nowrap;
     scrollbar-width: thin;
 }
 
-.install-popover__copy {
+.card__install-copy {
     flex: none;
-    padding: 7px 14px;
+    padding: 6px 12px;
     font: inherit;
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     font-weight: 600;
     color: #14161f;
     background: var(--yellow);
@@ -727,15 +684,15 @@ main {
     transition: filter 0.15s ease, transform 0.12s ease;
 }
 
-.install-popover__copy:hover {
+.card__install-copy:hover {
     filter: brightness(1.08);
 }
 
-.install-popover__copy:active {
+.card__install-copy:active {
     transform: scale(0.96);
 }
 
-.install-popover__copy.is-copied {
+.card__install-copy.is-copied {
     background: var(--green);
 }
 

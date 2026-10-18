@@ -17,12 +17,7 @@
         statCategories: document.getElementById('stat-categories'),
         statStars: document.getElementById('stat-stars'),
         lastUpdated: document.getElementById('last-updated'),
-        copyButtons: document.querySelectorAll('[data-copy]'),
-        popover: document.getElementById('install-popover'),
-        popoverTitle: document.getElementById('install-popover-title'),
-        popoverCommand: document.getElementById('install-popover-command'),
-        popoverCopy: document.getElementById('install-popover-copy'),
-        popoverClose: document.getElementById('install-popover-close')
+        copyButtons: document.querySelectorAll('[data-copy]')
     };
 
     var state = {
@@ -35,7 +30,6 @@
     };
 
     var activeCard = null;
-    var activeApp = null;
     var activeButton = null;
 
     function escapeText(value) {
@@ -46,12 +40,13 @@
         var card = document.createElement('article');
         card.className = 'card';
         card.title = 'Show install command';
+        var panelId = 'install-command-' + String(app.id).replace(/[^A-Za-z0-9_-]/g, '-');
 
         card.addEventListener('click', function (event) {
-            if (event.target instanceof Element && event.target.closest('a, button, summary, details, input, label')) {
+            if (event.target instanceof Element && event.target.closest('a, button, summary, details, input, label, .card__install-panel')) {
                 return;
             }
-            openPopover(card, app);
+            openInstall(card);
         });
 
         var top = document.createElement('div');
@@ -119,13 +114,12 @@
         installButton.type = 'button';
         installButton.className = 'card__install';
         installButton.textContent = 'Install';
-        installButton.setAttribute('aria-haspopup', 'dialog');
-        installButton.setAttribute('aria-controls', 'install-popover');
+        installButton.setAttribute('aria-controls', panelId);
         installButton.setAttribute('aria-expanded', 'false');
         installButton.setAttribute('aria-label', 'Show install command for ' + escapeText(app.name));
         installButton.addEventListener('click', function (event) {
             event.stopPropagation();
-            openPopover(card, app);
+            openInstall(card);
         });
         actions.appendChild(installButton);
 
@@ -157,6 +151,45 @@
         }
 
         foot.appendChild(actions);
+
+        var installPanel = document.createElement('div');
+        installPanel.className = 'card__install-panel';
+        installPanel.id = panelId;
+        installPanel.setAttribute('role', 'group');
+        installPanel.setAttribute('aria-label', 'Install command for ' + escapeText(app.name));
+
+        var installHint = document.createElement('p');
+        installHint.className = 'card__install-hint';
+        installHint.textContent = 'Run in PowerShell or Command Prompt:';
+        installPanel.appendChild(installHint);
+
+        var installCmd = document.createElement('div');
+        installCmd.className = 'card__install-cmd';
+
+        var installCode = document.createElement('code');
+        installCode.textContent = installCommand(app);
+        installCmd.appendChild(installCode);
+
+        var copyButton = document.createElement('button');
+        copyButton.type = 'button';
+        copyButton.className = 'card__install-copy';
+        copyButton.textContent = 'Copy';
+        copyButton.setAttribute('aria-label', 'Copy install command for ' + escapeText(app.name));
+        copyButton.addEventListener('click', function (event) {
+            event.stopPropagation();
+            copyText(installCommand(app)).then(function () {
+                copyButton.textContent = 'Copied!';
+                copyButton.classList.add('is-copied');
+                window.setTimeout(function () {
+                    copyButton.textContent = 'Copy';
+                    copyButton.classList.remove('is-copied');
+                }, 1600);
+            });
+        });
+        installCmd.appendChild(copyButton);
+        installPanel.appendChild(installCmd);
+
+        card.appendChild(installPanel);
         card.appendChild(foot);
 
         return card;
@@ -191,7 +224,7 @@
     }
 
     function render() {
-        closePopover({ restoreFocus: false });
+        closeInstall({ restoreFocus: false });
 
         var visible = state.apps.filter(matches);
         var fragment = document.createDocumentFragment();
@@ -218,56 +251,42 @@
         return 'scoop install ' + app.id;
     }
 
-    function positionPopover(card) {
-        var rect = card.getBoundingClientRect();
-        var pop = el.popover;
-        var margin = 12;
-        var width = pop.offsetWidth;
-        var height = pop.offsetHeight;
-        var top = rect.bottom + 8;
-        if (top + height > window.innerHeight - margin) {
-            top = rect.top - height - 8;
-        }
-        top = Math.max(margin, Math.min(top, window.innerHeight - height - margin));
-        var left = rect.left + rect.width / 2 - width / 2;
-        left = Math.max(margin, Math.min(left, window.innerWidth - width - margin));
-        pop.style.top = top + 'px';
-        pop.style.left = left + 'px';
-    }
-
-    function openPopover(card, app) {
+    function openInstall(card) {
         if (activeCard === card) {
-            closePopover();
+            closeInstall();
             return;
         }
-        closePopover({ restoreFocus: false });
+        closeInstall({ restoreFocus: false });
         activeCard = card;
-        activeApp = app;
         activeButton = card.querySelector('.card__install');
-        el.popoverTitle.textContent = escapeText(app.name);
-        el.popoverCommand.textContent = installCommand(app);
-        el.popoverCopy.textContent = 'Copy';
-        el.popoverCopy.classList.remove('is-copied');
+        var copy = card.querySelector('.card__install-copy');
+        if (copy) {
+            copy.textContent = 'Copy';
+            copy.classList.remove('is-copied');
+        }
         card.classList.add('is-selected');
         if (activeButton) {
             activeButton.setAttribute('aria-expanded', 'true');
         }
-        el.popover.hidden = false;
-        positionPopover(card);
-        el.popoverCopy.focus();
+        if (copy) {
+            copy.focus();
+        }
     }
 
-    function closePopover(options) {
+    function closeInstall(options) {
         var card = activeCard;
         var button = activeButton;
         if (!card) {
             return;
         }
         activeCard = null;
-        activeApp = null;
         activeButton = null;
-        el.popover.hidden = true;
         card.classList.remove('is-selected');
+        var copy = card.querySelector('.card__install-copy');
+        if (copy) {
+            copy.textContent = 'Copy';
+            copy.classList.remove('is-copied');
+        }
         if (button) {
             button.setAttribute('aria-expanded', 'false');
         }
@@ -276,50 +295,20 @@
         }
     }
 
-    function wirePopover() {
-        el.popoverClose.addEventListener('click', function () {
-            closePopover();
-        });
-
-        el.popoverCopy.addEventListener('click', function () {
-            if (!activeApp) {
-                return;
-            }
-            copyText(installCommand(activeApp)).then(function () {
-                el.popoverCopy.textContent = 'Copied!';
-                el.popoverCopy.classList.add('is-copied');
-                window.setTimeout(function () {
-                    el.popoverCopy.textContent = 'Copy';
-                    el.popoverCopy.classList.remove('is-copied');
-                }, 1600);
-            });
-        });
-
+    function wireInstall() {
         document.addEventListener('click', function (event) {
             if (!activeCard) {
                 return;
             }
-            if (el.popover.contains(event.target) || activeCard.contains(event.target)) {
+            if (activeCard.contains(event.target)) {
                 return;
             }
-            closePopover({ restoreFocus: false });
+            closeInstall({ restoreFocus: false });
         });
 
         document.addEventListener('keydown', function (event) {
             if (event.key === 'Escape' && activeCard) {
-                closePopover();
-            }
-        });
-
-        window.addEventListener('scroll', function () {
-            if (activeCard) {
-                positionPopover(activeCard);
-            }
-        }, { passive: true });
-
-        window.addEventListener('resize', function () {
-            if (activeCard) {
-                positionPopover(activeCard);
+                closeInstall();
             }
         });
     }
@@ -508,7 +497,7 @@
 
     function init() {
         wireEvents();
-        wirePopover();
+        wireInstall();
         readUrl();
         el.search.value = state.query;
         el.starsOnly.checked = state.starsOnly;
