@@ -1,32 +1,58 @@
-# Pencil [![Tests](https://github.com/PrantoSMSS/Pencil/actions/workflows/ci.yml/badge.svg)](https://github.com/PrantoSMSS/Pencil/actions/workflows/ci.yml) [![Excavator](https://github.com/PrantoSMSS/Pencil/actions/workflows/excavator.yml/badge.svg)](https://github.com/PrantoSMSS/Pencil/actions/workflows/excavator.yml)
+<div align="center">
 
-A [Scoop](https://scoop.sh) bucket focused on accumulating all the weeb, otaku, geek and nerd based applications. It is a fork of [Rinkerbel/scooped](https://github.com/Rinkerbel/scooped).
+<img src="img/logo.svg" alt="Pencil logo" width="140" height="140">
 
-## Usage
+# Pencil
 
-After installing [Scoop](https://scoop.sh/), enter the following line in a
-Command Prompt or PowerShell window:
+**Sharpen your Windows setup — a Scoop bucket for anime, games, music & everything geek.**
+
+[![Tests](https://github.com/prantosmss/Pencil/actions/workflows/ci.yml/badge.svg)](https://github.com/prantosmss/Pencil/actions/workflows/ci.yml)
+[![Excavator](https://github.com/prantosmss/Pencil/actions/workflows/excavator.yml/badge.svg)](https://github.com/prantosmss/Pencil/actions/workflows/excavator.yml)
+[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](LICENSE)
+[![Scoop](https://img.shields.io/badge/Scoop-bucket-ff69b4.svg)](https://scoop.sh)
+
+[Quick start](#-quick-start) · [Browse apps](#-whats-inside) · [Footnotes](#footnotes) · [Browse on scoop.sh](https://scoop.sh/#/apps?q=%22https://github.com/prantosmss/Pencil%22&o=false)
+
+</div>
+
+---
+
+Pencil collects the apps that weebs, otakus, geeks and nerds actually reach for: anime and manga clients, visual novel tools, trackers and players, emulators, game launchers, music software, downloaders, and a shelf of retro and quirky utilities, all installable with a single `scoop install`.
+
+It is a fork of [Rinkerbel/scooped](https://github.com/Rinkerbel/scooped), and it also holds a few of the maintainer's own projects.
+
+## ⚡ Quick start
+
+After installing [Scoop](https://scoop.sh/), run this in Command Prompt or PowerShell:
 
 ```powershell
-scoop bucket add pencil https://github.com/PrantoSMSS/Pencil
+scoop bucket add pencil https://github.com/prantosmss/Pencil
 ```
 
-> **Note:** This bucket was renamed from `weeboop` to `pencil`. If you added it
-> under the old name, run `scoop bucket rm weeboop` and re-add it with
-> `scoop bucket add pencil https://github.com/PrantoSMSS/Pencil`.
-
-Once this is done, you can install any app from this bucket.\
-For instance, use the following command:
+Then install anything from the bucket:
 
 ```powershell
 scoop install unyo
 ```
 
-## List of applications in this bucket
+> [!NOTE]
+> This bucket was renamed from `weeboop` to `pencil`. If you added it under the old name, run `scoop bucket rm weeboop` and re-add it with
+> `scoop bucket add pencil https://github.com/prantosmss/Pencil`.
 
-> Click here to [browse the list on scoop instead](https://scoop.sh/#/apps?q="https://github.com/PrantoSMSS/Pencil"&o=false)
+## 🗂️ What's inside
 
-### ![Anime, Manga & Comics](https://img.shields.io/badge/Anime%2C%20Manga%20%26%20Comics-ff69b4)
+Apps marked with ⭐ are the headline picks of each category.
+
+| | Category | | Category |
+| :-: | --- | :-: | --- |
+| 🎌 | [Anime, Manga & Comics](#-anime-manga--comics) | 🎮 | [Gaming & Modding](#-gaming--modding) |
+| 📖 | [Visual Novel & Text Hooking](#-visual-novel--text-hooking) | 🕹️ | [Emulation & Homebrew](#-emulation--homebrew) |
+| 🈶 | [Language & Dictionaries](#-language--dictionaries) | 📺 | [Media Players & Servers](#-media-players--servers) |
+| 🎵 | [Music](#-music) | 💬 | [Subtitles](#-subtitles) |
+| ⬇️ | [Downloaders & Automation](#-downloaders--automation) | 🇨🇳 | [Chinese Apps](#-chinese-apps) |
+| 🧰 | [Utilities & Misc](#-utilities--misc) | 👾 | [Retro & Geeky Hobbies](#-retro--geeky-hobbies) |
+
+### 🎌 Anime, Manga & Comics
 
 | App | Purpose |
 | --- | --- |
@@ -52,19 +78,19 @@ scoop install unyo
 | [MangaJaNaiConverterGui](https://github.com/the-database/MangaJaNaiConverterGui) | GUI for upscaling manga with PyTorch models |
 | [oneAnime](https://github.com/Predidit/oneAnime) | Anime streaming client for anime1 with Material You design |
 
-### ![Visual Novel & Text Hooking](https://img.shields.io/badge/Visual%20Novel%20%26%20Text%20Hooking-9400d3)
+### 📖 Visual Novel & Text Hooking
 
 | App | Purpose |
 | --- | --- |
 | [Textractor ⭐](https://github.com/Artikash/Textractor) | X86/x64 video game and visual novel text hooker, highly extensible with translation extensions [^3] |
 
-### ![Language & Dictionaries](https://img.shields.io/badge/Language%20%26%20Dictionaries-1e90ff)
+### 🈶 Language & Dictionaries
 
 | App | Purpose |
 | --- | --- |
 | [meikipop ⭐](https://github.com/rtr46/meikipop) | Universal Japanese OCR popup dictionary for instant on-screen lookups [^4] |
 
-### ![Music](https://img.shields.io/badge/Music-32cd32)
+### 🎵 Music
 
 | App | Purpose |
 | --- | --- |
@@ -104,7 +130,7 @@ scoop install unyo
 | [youtui](https://github.com/nick42d/youtui) | Simple TUI for YouTube Music |
 | [zxtune](https://zxtune.bitbucket.io/) | Cross-platform chiptune player for many retro formats |
 
-### ![Gaming & Modding](https://img.shields.io/badge/Gaming%20%26%20Modding-00695c)
+### 🎮 Gaming & Modding
 
 | App | Purpose |
 | --- | --- |
@@ -112,13 +138,13 @@ scoop install unyo
 | [heroic ⭐](https://heroicgameslauncher.com/) | Native GOG and Epic Games launcher (Heroic Games Launcher) |
 | [hmcl ⭐](https://hmcl.huangyuhui.net) | Powerful Minecraft launcher with many features |
 | [legendary ⭐](https://github.com/derrod/legendary) | Open-source Epic Games CLI launcher |
-| [LuaTools ⭐](https://lua.tools) | AppID manager for ST [^6] |
+| [LuaTools ⭐](https://lua.tools) | AppID manager for ST [^5] |
 | [multimc ⭐](https://multimc.org/) | Custom Minecraft launcher for managing mods and instances |
 | [replaybook ⭐](https://github.com/fraxiinus/ReplayBook) | Play, manage and inspect League of Legends replays |
 | [teyvatguide ⭐](https://github.com/BTMuli/TeyvatGuide) | Game tool for Genshin Impact players |
 | [undertalemodtool ⭐](https://github.com/UnderminersTeam/UndertaleModTool) | Complete tool for modding, decompiling and unpacking Undertale |
 | [airshipper](https://veloren.net/) | Official launcher for the Veloren open-world voxel game |
-| [arc_unpacker](https://github.com/vn-tools/arc_unpacker) | Extracts images, sounds and music from many game engines |
+| [arc\_unpacker](https://github.com/vn-tools/arc_unpacker) | Extracts images, sounds and music from many game engines |
 | [asfenhance](https://github.com/chr233/ASFEnhance) | Plugin extensions for ArchiSteamFarm |
 | [bluemap-cli](https://bluemap.bluecolored.de/) | Maps your Minecraft world into interactive 3D models |
 | [chunky](https://chunky-dev.github.io/docs/) | Minecraft world renderer for high-quality images |
@@ -142,7 +168,7 @@ scoop install unyo
 | [undertalemodtool-cli](https://github.com/UnderminersTeam/UndertaleModTool) | CLI version of UndertaleModTool |
 | [viaproxy](https://github.com/ViaVersion/ViaProxy) | Proxy that lets any client join online Minecraft servers |
 
-### ![Emulation & Homebrew](https://img.shields.io/badge/Emulation%20%26%20Homebrew-5d4037)
+### 🕹️ Emulation & Homebrew
 
 | App | Purpose |
 | --- | --- |
@@ -160,7 +186,7 @@ scoop install unyo
 | [touchhle](https://touchhle.org/) | High-level emulator for iPhone OS apps |
 | [winuae](https://www.winuae.net/) | Amiga emulator for Windows |
 
-### ![Media Players & Servers](https://img.shields.io/badge/Media%20Players%20%26%20Servers-00838f)
+### 📺 Media Players & Servers
 
 | App | Purpose |
 | --- | --- |
@@ -173,7 +199,7 @@ scoop install unyo
 | [fcast-sender](https://fcast.org/) | Mirrors your screen, audio, videos or music to FCast receivers |
 | [iris-player](https://github.com/nini22P/Iris) | Lightweight and modern video player |
 
-### ![Subtitles](https://img.shields.io/badge/Subtitles-c62828)
+### 💬 Subtitles
 
 | App | Purpose |
 | --- | --- |
@@ -182,7 +208,7 @@ scoop install unyo
 | [subtitles-database](https://github.com/foxofice/sub_share) | Search, share and download subtitles |
 | [whispersubtranslate](https://github.com/Blue-B/WhisperSubTranslate) | Extracts subtitles from videos with Whisper and translates them |
 
-### ![Downloaders & Automation](https://img.shields.io/badge/Downloaders%20%26%20Automation-ff4500)
+### ⬇️ Downloaders & Automation
 
 | App | Purpose |
 | --- | --- |
@@ -190,8 +216,8 @@ scoop install unyo
 | [hitomi-downloader ⭐](https://github.com/KurtBestor/Hitomi-Downloader) | Desktop utility to download images/videos/music/text from various websites |
 | [kemono-downloader ⭐](https://github.com/Yuvi9587/Kemono-Downloader) | GUI downloader for Kemono, Coomer, Bunkr, Erome, and nhentai |
 | [lightnovel-crawler ⭐](https://github.com/dipu-bd/lightnovel-crawler) | Downloads novels from online sources and generates e-books |
-| [N_m3u8DL-CLI ⭐](https://nilaoda.github.io/N_m3u8DL-CLI/) | Powerful m3u8/dash stream downloader (legacy) |
-| [n_m3u8dl-re ⭐](https://github.com/nilaoda/N_m3u8DL-RE) | Modern and powerful m3u8/mpd stream downloader (N_m3u8DL-RE) |
+| [N\_m3u8DL-CLI ⭐](https://nilaoda.github.io/N_m3u8DL-CLI/) | Powerful m3u8/dash stream downloader (legacy) |
+| [n\_m3u8dl-re ⭐](https://github.com/nilaoda/N_m3u8DL-RE) | Modern and powerful m3u8/mpd stream downloader (N\_m3u8DL-RE) |
 | [nyaa ⭐](https://github.com/Beastwick18/nyaa) | TUI for browsing and downloading torrents from nyaa.si |
 | [PreCut](https://github.com/PrantoSMSS/PreCut) | Transcript generation, clip downloads, and proxy creation for content creators |
 | [qui](https://github.com/autobrr/qui) | Modern alternative webUI for qBittorrent with multi-instance support |
@@ -199,11 +225,11 @@ scoop install unyo
 | [twitch-hls-client](https://github.com/2bc4/twitch-hls-client) | CLI for watching and recording Twitch streams |
 | [vget](https://vget.io) | Versatile CLI toolkit for downloading audio and video |
 
-### ![Chinese Apps](https://img.shields.io/badge/Chinese%20Apps-d32f2f)
+### 🇨🇳 Chinese Apps
 
 | App | Purpose |
 | --- | --- |
-| [animeko ⭐](https://myani.org/) | Anime streaming app with library and progress syncing (non-portable) [^7] |
+| [animeko ⭐](https://myani.org/) | Anime streaming app with library and progress syncing (non-portable) [^6] |
 | [BililiveRecorder ⭐](https://github.com/Bililive/BililiveRecorder) | Bilibili live stream recording tool |
 | [chinesesubfinder ⭐](https://github.com/allanpk716/ChineseSubFinder) | Auto-search and download Chinese subtitles |
 | [Kazumi ⭐](https://kazumi.app) | Anime streaming app |
@@ -226,7 +252,7 @@ scoop install unyo
 | [steampp](https://steampp.net/) | Steam toolbox (community acceleration, library unlock, skins) |
 | [wnacg-downloader](https://github.com/lanyeeee/wnacg-downloader) | Manga downloader for Wnacg |
 
-### ![Utilities & Misc](https://img.shields.io/badge/Utilities%20%26%20Misc-708090)
+### 🧰 Utilities & Misc
 
 | App | Purpose |
 | --- | --- |
@@ -236,9 +262,9 @@ scoop install unyo
 | [anime4kcpp-cli](https://github.com/TianZerL/Anime4KCPP) | CLI version of the Anime4K anime upscaler |
 | [port-chrome](https://www.google.com/chrome/) | Portable Google Chrome; profile and cache stored in the Scoop persist folder instead of %LOCALAPPDATA% |
 | [shelter-installer](https://shelter.uwu.network) | Installer for the shelter client mod for Discord |
-| [Twitch-Channel-Points-Miner](https://github.com/rdavydov/Twitch-Channel-Points-Miner-v2) | Watches streams and earns Twitch channel points automatically [^5] |
+| [Twitch-Channel-Points-Miner](https://github.com/rdavydov/Twitch-Channel-Points-Miner-v2) | Watches streams and earns Twitch channel points automatically [^7] |
 
-### ![Retro & Geeky Hobbies](https://img.shields.io/badge/Retro%20%26%20Geeky%20Hobbies-424242)
+### 👾 Retro & Geeky Hobbies
 
 | App | Purpose |
 | --- | --- |
@@ -256,10 +282,26 @@ scoop install unyo
 | [shogigui](http://shogigui.siganus.com/) | Windows GUI for shogi (Japanese chess) |
 | [simulide](https://simulide.com/) | Simple real-time electronic circuit simulator |
 
-[^1]: Previously known as Miru
+## Footnotes
+ 
+[^1]: Previously known as Miru.
+ 
 [^2]: Requires a Java Runtime Environment 21 or newer (JRE 21+) installed on the system to run.
+ 
 [^3]: Some antivirus engines flag the installer's temp file as a false-positive trojan. This is a known false positive caused by Textractor's core function: injecting into game processes to hook text output.
+ 
 [^4]: Runs from the system tray. Right-click the tray icon to open settings, reselect the scan region, or change the OCR provider.
-[^5]: Requires Python. After installing, navigate to the app directory (`scoop prefix TwitchChannelPointsMiner`) and run `pip install -r requirements.txt`, then configure `run.py` before running.
-[^6]: Requires the .NET 8 Desktop Runtime to run.
-[^7]: Animeko is NOT portable. Settings are stored in `%APPDATA%\Him188\Ani`, and will be purged during uninstallation.
+ 
+[^5]: Requires the .NET 8 Desktop Runtime to run.
+ 
+[^6]: Animeko is NOT portable. Settings are stored in `%APPDATA%\Him188\Ani`, and will be purged during uninstallation.
+ 
+[^7]: Requires Python. After installing, navigate to the app directory (`scoop prefix TwitchChannelPointsMiner`) and run `pip install -r requirements.txt`, then configure `run.py` before running.
+
+---
+
+<div align="center">
+
+Released under the [Unlicense](LICENSE) · Forked from [Rinkerbel/scooped](https://github.com/Rinkerbel/scooped) · Category conventions live in [CATEGORIZATION.md](CATEGORIZATION.md)
+
+</div>

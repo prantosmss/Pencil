@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="pencil-logo-title">
+  <title id="pencil-logo-title">Pencil logo</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2d3250"/>
+      <stop offset="1" stop-color="#14161f"/>
+    </linearGradient>
+    <linearGradient id="trail" gradientUnits="userSpaceOnUse" x1="68" y1="0" x2="198" y2="0">
+      <stop offset="0" stop-color="#ff69b4"/>
+      <stop offset="0.35" stop-color="#b45cff"/>
+      <stop offset="0.7" stop-color="#1e90ff"/>
+      <stop offset="1" stop-color="#32cd32"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Badge background -->
+  <rect x="12" y="12" width="232" height="232" rx="56" fill="url(#bg)"/>
+  <rect x="12.5" y="12.5" width="231" height="231" rx="55.5" fill="none" stroke="#ffffff" stroke-opacity="0.1"/>
+
+  <!-- Ink trail left by the pencil -->
+  <path d="M68 190 C88 216 112 200 132 208 S176 214 198 194"
+        fill="none" stroke="url(#trail)" stroke-width="9" stroke-linecap="round"/>
+
+  <!-- Pencil (drawn pointing down, rotated so the tip points to the lower left) -->
+  <g transform="translate(128 128) rotate(45)">
+    <!-- eraser -->
+    <rect x="-18" y="-85" width="36" height="20" rx="7" fill="#ff7eb6"/>
+    <!-- ferrule -->
+    <rect x="-18" y="-67" width="36" height="14" fill="#c9d1e0"/>
+    <rect x="-18" y="-63" width="36" height="2" fill="#9aa3b8"/>
+    <rect x="-18" y="-57" width="36" height="2" fill="#9aa3b8"/>
+    <!-- body facets -->
+    <rect x="-18" y="-53" width="12" height="88" fill="#ffe680"/>
+    <rect x="-6" y="-53" width="12" height="88" fill="#ffd54a"/>
+    <rect x="6" y="-53" width="12" height="88" fill="#f2b21c"/>
+    <!-- wood cone -->
+    <polygon points="-18,35 18,35 0,85" fill="#f3d3a0"/>
+    <polygon points="0,35 18,35 0,85" fill="#000000" fill-opacity="0.08"/>
+    <!-- graphite lead -->
+    <polygon points="-6.5,67 6.5,67 0,85" fill="#5b6178"/>
+  </g>
+
+  <!-- Sparkles -->
+  <path d="M70 46 L75 62 L91 67 L75 72 L70 88 L65 72 L49 67 L65 62 Z" fill="#ffffff" fill-opacity="0.92"/>
+  <path d="M202 120 L205 130 L215 133 L205 136 L202 146 L199 136 L189 133 L199 130 Z" fill="#ffffff" fill-opacity="0.7"/>
+  <circle cx="50" cy="120" r="3" fill="#ffffff" fill-opacity="0.5"/>
+</svg>
