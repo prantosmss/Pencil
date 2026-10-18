@@ -98,6 +98,18 @@
         </p>
     </footer>
 
+    <div class="install-popover" id="install-popover" role="dialog" aria-labelledby="install-popover-title" hidden>
+        <div class="install-popover__head">
+            <h2 class="install-popover__title" id="install-popover-title"></h2>
+            <button class="install-popover__close" type="button" id="install-popover-close" aria-label="Close install command">&times;</button>
+        </div>
+        <p class="install-popover__hint">Run this in PowerShell or Command Prompt:</p>
+        <div class="install-popover__cmd">
+            <code id="install-popover-command"></code>
+            <button class="install-popover__copy" type="button" id="install-popover-copy">Copy</button>
+        </div>
+    </div>
+
     <script src="assets/js/app.js" defer></script>
 </body>
 </html>

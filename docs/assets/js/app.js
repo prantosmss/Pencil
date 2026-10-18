@@ -17,7 +17,12 @@
         statCategories: document.getElementById('stat-categories'),
         statStars: document.getElementById('stat-stars'),
         lastUpdated: document.getElementById('last-updated'),
-        copyButtons: document.querySelectorAll('[data-copy]')
+        copyButtons: document.querySelectorAll('[data-copy]'),
+        popover: document.getElementById('install-popover'),
+        popoverTitle: document.getElementById('install-popover-title'),
+        popoverCommand: document.getElementById('install-popover-command'),
+        popoverCopy: document.getElementById('install-popover-copy'),
+        popoverClose: document.getElementById('install-popover-close')
     };
 
     var state = {
@@ -29,6 +34,10 @@
         starsOnly: false
     };
 
+    var activeCard = null;
+    var activeApp = null;
+    var activeButton = null;
+
     function escapeText(value) {
         return value == null ? '' : String(value);
     }
@@ -36,6 +45,14 @@
     function makeCard(app) {
         var card = document.createElement('article');
         card.className = 'card';
+        card.title = 'Show install command';
+
+        card.addEventListener('click', function (event) {
+            if (event.target instanceof Element && event.target.closest('a, button, summary, details, input, label')) {
+                return;
+            }
+            openPopover(card, app);
+        });
 
         var top = document.createElement('div');
         top.className = 'card__top';
@@ -97,6 +114,20 @@
 
         var actions = document.createElement('span');
         actions.className = 'card__actions';
+
+        var installButton = document.createElement('button');
+        installButton.type = 'button';
+        installButton.className = 'card__install';
+        installButton.textContent = 'Install';
+        installButton.setAttribute('aria-haspopup', 'dialog');
+        installButton.setAttribute('aria-controls', 'install-popover');
+        installButton.setAttribute('aria-expanded', 'false');
+        installButton.setAttribute('aria-label', 'Show install command for ' + escapeText(app.name));
+        installButton.addEventListener('click', function (event) {
+            event.stopPropagation();
+            openPopover(card, app);
+        });
+        actions.appendChild(installButton);
 
         if (app.version) {
             var version = document.createElement('span');
@@ -160,6 +191,8 @@
     }
 
     function render() {
+        closePopover({ restoreFocus: false });
+
         var visible = state.apps.filter(matches);
         var fragment = document.createDocumentFragment();
         visible.forEach(function (app) {
@@ -179,6 +212,116 @@
 
         el.empty.hidden = visible.length !== 0;
         el.grid.hidden = visible.length === 0;
+    }
+
+    function installCommand(app) {
+        return 'scoop install ' + app.id;
+    }
+
+    function positionPopover(card) {
+        var rect = card.getBoundingClientRect();
+        var pop = el.popover;
+        var margin = 12;
+        var width = pop.offsetWidth;
+        var height = pop.offsetHeight;
+        var top = rect.bottom + 8;
+        if (top + height > window.innerHeight - margin) {
+            top = rect.top - height - 8;
+        }
+        top = Math.max(margin, Math.min(top, window.innerHeight - height - margin));
+        var left = rect.left + rect.width / 2 - width / 2;
+        left = Math.max(margin, Math.min(left, window.innerWidth - width - margin));
+        pop.style.top = top + 'px';
+        pop.style.left = left + 'px';
+    }
+
+    function openPopover(card, app) {
+        if (activeCard === card) {
+            closePopover();
+            return;
+        }
+        closePopover({ restoreFocus: false });
+        activeCard = card;
+        activeApp = app;
+        activeButton = card.querySelector('.card__install');
+        el.popoverTitle.textContent = escapeText(app.name);
+        el.popoverCommand.textContent = installCommand(app);
+        el.popoverCopy.textContent = 'Copy';
+        el.popoverCopy.classList.remove('is-copied');
+        card.classList.add('is-selected');
+        if (activeButton) {
+            activeButton.setAttribute('aria-expanded', 'true');
+        }
+        el.popover.hidden = false;
+        positionPopover(card);
+        el.popoverCopy.focus();
+    }
+
+    function closePopover(options) {
+        var card = activeCard;
+        var button = activeButton;
+        if (!card) {
+            return;
+        }
+        activeCard = null;
+        activeApp = null;
+        activeButton = null;
+        el.popover.hidden = true;
+        card.classList.remove('is-selected');
+        if (button) {
+            button.setAttribute('aria-expanded', 'false');
+        }
+        if (!options || options.restoreFocus !== false) {
+            (button || card).focus();
+        }
+    }
+
+    function wirePopover() {
+        el.popoverClose.addEventListener('click', function () {
+            closePopover();
+        });
+
+        el.popoverCopy.addEventListener('click', function () {
+            if (!activeApp) {
+                return;
+            }
+            copyText(installCommand(activeApp)).then(function () {
+                el.popoverCopy.textContent = 'Copied!';
+                el.popoverCopy.classList.add('is-copied');
+                window.setTimeout(function () {
+                    el.popoverCopy.textContent = 'Copy';
+                    el.popoverCopy.classList.remove('is-copied');
+                }, 1600);
+            });
+        });
+
+        document.addEventListener('click', function (event) {
+            if (!activeCard) {
+                return;
+            }
+            if (el.popover.contains(event.target) || activeCard.contains(event.target)) {
+                return;
+            }
+            closePopover({ restoreFocus: false });
+        });
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && activeCard) {
+                closePopover();
+            }
+        });
+
+        window.addEventListener('scroll', function () {
+            if (activeCard) {
+                positionPopover(activeCard);
+            }
+        }, { passive: true });
+
+        window.addEventListener('resize', function () {
+            if (activeCard) {
+                positionPopover(activeCard);
+            }
+        });
     }
 
     function setActiveChip() {
@@ -365,6 +508,7 @@
 
     function init() {
         wireEvents();
+        wirePopover();
         readUrl();
         el.search.value = state.query;
         el.starsOnly.checked = state.starsOnly;

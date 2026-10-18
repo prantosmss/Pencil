@@ -456,6 +456,7 @@ main {
     background: var(--panel);
     border: 1px solid var(--border);
     border-radius: var(--radius);
+    cursor: pointer;
     transition: transform 0.16s ease, border-color 0.16s ease, background 0.16s ease;
 }
 
@@ -480,6 +481,15 @@ main {
 }
 
 .card:hover::before {
+    opacity: 1;
+}
+
+.card.is-selected {
+    border-color: var(--purple);
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.card.is-selected::before {
     opacity: 1;
 }
 
@@ -545,6 +555,7 @@ main {
 
 .card__foot {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
@@ -581,9 +592,32 @@ main {
 
 .card__actions {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: flex-end;
     gap: 8px;
+    margin-left: auto;
     font-size: 0.82rem;
+}
+
+.card__install {
+    padding: 2px 8px;
+    font: inherit;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    background: transparent;
+    border: 1px solid rgba(255, 213, 74, 0.45);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.card__install:hover {
+    background: rgba(255, 213, 74, 0.12);
+    border-color: rgba(255, 213, 74, 0.8);
 }
 
 .card__version {
@@ -598,6 +632,111 @@ main {
 
 .card__link:hover {
     color: var(--pink);
+}
+
+/* ---------- Install popover ---------- */
+
+.install-popover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 50;
+    width: min(390px, calc(100vw - 24px));
+    padding: 16px;
+    background: var(--panel-solid);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    box-shadow: 0 26px 70px -24px rgba(0, 0, 0, 1);
+}
+
+.install-popover[hidden] {
+    display: none;
+}
+
+.install-popover__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.install-popover__title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    word-break: break-word;
+}
+
+.install-popover__close {
+    flex: none;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    font: inherit;
+    font-size: 1.25rem;
+    line-height: 1;
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.install-popover__close:hover {
+    color: var(--text);
+    border-color: var(--border-strong);
+}
+
+.install-popover__hint {
+    margin: 6px 0 10px;
+    font-size: 0.82rem;
+    color: var(--faint);
+}
+
+.install-popover__cmd {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 7px 7px 12px;
+    background: rgba(0, 0, 0, 0.28);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.install-popover__cmd code {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow-x: auto;
+    font-family: "Cascadia Code", "Consolas", ui-monospace, monospace;
+    font-size: 0.86rem;
+    white-space: nowrap;
+    scrollbar-width: thin;
+}
+
+.install-popover__copy {
+    flex: none;
+    padding: 7px 14px;
+    font: inherit;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #14161f;
+    background: var(--yellow);
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: filter 0.15s ease, transform 0.12s ease;
+}
+
+.install-popover__copy:hover {
+    filter: brightness(1.08);
+}
+
+.install-popover__copy:active {
+    transform: scale(0.96);
+}
+
+.install-popover__copy.is-copied {
+    background: var(--green);
 }
 
 /* ---------- Empty state ---------- */
