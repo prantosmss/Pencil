@@ -42,7 +42,9 @@ if (-not (Test-Path -LiteralPath $bucketDir)) {
     throw "Bucket directory not found: $bucketDir"
 }
 
-$catalog = Get-Content -LiteralPath $catalogPath -Raw | ConvertFrom-Json
+# Read explicitly as UTF-8: Windows PowerShell 5.1 otherwise uses the ANSI
+# code page and turns emoji (and other non-ASCII text) into mojibake.
+$catalog = Get-Content -LiteralPath $catalogPath -Raw -Encoding UTF8 | ConvertFrom-Json
 $categories = @($catalog.categories)
 
 # Index catalog entries by manifest id so we can look them up in O(1).
@@ -76,7 +78,7 @@ foreach ($manifestFile in $manifests) {
     $pathParts = $relativePath -split '/'
     $collection = if ($pathParts.Count -ge 3) { $pathParts[1] } else { 'community' }
 
-    $manifest = Get-Content -LiteralPath $manifestFile.FullName -Raw | ConvertFrom-Json
+    $manifest = Get-Content -LiteralPath $manifestFile.FullName -Raw -Encoding UTF8 | ConvertFrom-Json
     $entry = $null
     if ($entries.ContainsKey($id)) {
         $entry = $entries[$id]
@@ -152,6 +154,16 @@ $document = [ordered] @{
 }
 
 $json = ($document | ConvertTo-Json -Depth 6)
+
+# Windows PowerShell 5.1 escapes non-ASCII characters as \uXXXX. Decode those
+# back to literal characters (including surrogate pairs such as emoji) so the
+# generated file is identical whether it runs under Windows PowerShell or
+# PowerShell 7. Control characters (< U+0020) stay escaped for valid JSON.
+$json = [regex]::Replace($json, '(?<!\\)\\u([0-9a-fA-F]{4})', {
+    param($match)
+    $codePoint = [Convert]::ToInt32($match.Groups[1].Value, 16)
+    if ($codePoint -lt 0x20) { $match.Value } else { [string] [char] $codePoint }
+})
 
 # Keep the output consistent with the repository's CRLF convention and make
 # sure the file ends with a newline (Scoop's CI style checks enforce both).
