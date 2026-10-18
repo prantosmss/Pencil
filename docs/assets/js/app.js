@@ -77,11 +77,23 @@
         var foot = document.createElement('div');
         foot.className = 'card__foot';
 
+        var meta = document.createElement('span');
+        meta.className = 'card__meta';
+
+        if (app.collection === 'official') {
+            var official = document.createElement('span');
+            official.className = 'card__official';
+            official.textContent = 'Official';
+            meta.appendChild(official);
+        }
+
         var cat = document.createElement('span');
         cat.className = 'card__cat';
         var category = state.labelById[app.category];
         cat.textContent = category ? category.label : escapeText(app.category);
-        foot.appendChild(cat);
+        meta.appendChild(cat);
+
+        foot.appendChild(meta);
 
         var actions = document.createElement('span');
         actions.className = 'card__actions';

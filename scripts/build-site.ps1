@@ -5,8 +5,8 @@
 
 .DESCRIPTION
     Merges the curated catalog in data/catalog.json (categories, stars and
-    descriptions) with metadata read from every manifest in bucket/*.json
-    (homepage, version) and writes docs/data/apps.json.
+    descriptions) with metadata read from every manifest under bucket/
+    (recursively; homepage, version) and writes docs/data/apps.json.
 
     The output powers the GitHub Pages landing page. It is a plain static
     file, so the page keeps working on any static host with no server code.
@@ -57,12 +57,25 @@ for ($i = 0; $i -lt $categories.Count; $i++) {
     $categoryOrder[[string] $categories[$i].id] = $i
 }
 
-$manifests = Get-ChildItem -LiteralPath $bucketDir -Filter '*.json' -File | Sort-Object Name
+$manifests = Get-ChildItem -LiteralPath $bucketDir -Filter '*.json' -File -Recurse | Sort-Object FullName
 $apps = New-Object System.Collections.Generic.List[object]
 $uncataloged = New-Object System.Collections.Generic.List[string]
+$seenIds = @{}
 
 foreach ($manifestFile in $manifests) {
     $id = [System.IO.Path]::GetFileNameWithoutExtension($manifestFile.Name)
+    $relativePath = $manifestFile.FullName.Substring($RepoRoot.Length).TrimStart('\', '/').Replace('\', '/')
+
+    if ($seenIds.ContainsKey($id)) {
+        throw "Duplicate manifest id '$id' found at '$relativePath' and '$($seenIds[$id])'."
+    }
+    $seenIds[$id] = $relativePath
+
+    # bucket/<collection>/<app>.json — anything directly in bucket/ is treated
+    # as community for backwards compatibility.
+    $pathParts = $relativePath -split '/'
+    $collection = if ($pathParts.Count -ge 3) { $pathParts[1] } else { 'community' }
+
     $manifest = Get-Content -LiteralPath $manifestFile.FullName -Raw | ConvertFrom-Json
     $entry = $null
     if ($entries.ContainsKey($id)) {
@@ -85,15 +98,16 @@ foreach ($manifestFile in $manifests) {
     }
 
     $apps.Add([pscustomobject] @{
-        id       = $id
-        name     = $name
-        category = $category
-        star     = $star
-        purpose  = $purpose
-        note     = $note
-        homepage = $manifest.homepage
-        version  = $manifest.version
-        manifest = "https://github.com/prantosmss/Pencil/blob/main/bucket/$($manifestFile.Name)"
+        id         = $id
+        name       = $name
+        category   = $category
+        star       = $star
+        purpose    = $purpose
+        note       = $note
+        homepage   = $manifest.homepage
+        version    = $manifest.version
+        manifest   = "https://github.com/prantosmss/Pencil/blob/main/$relativePath"
+        collection = $collection
     })
 }
 
@@ -102,7 +116,7 @@ foreach ($id in $uncataloged) {
 }
 
 foreach ($entry in $catalog.apps) {
-    if (-not (Test-Path -LiteralPath (Join-Path $bucketDir "$($entry.id).json"))) {
+    if (-not $seenIds.ContainsKey([string] $entry.id)) {
         Write-Warning "catalog.json entry '$($entry.id)' has no matching bucket manifest; skipped."
     }
 }
@@ -114,14 +128,15 @@ $ordered = $apps | Sort-Object `
 
 $outApps = foreach ($app in $ordered) {
     $record = [ordered] @{
-        id       = $app.id
-        name     = $app.name
-        category = $app.category
-        star     = $app.star
-        purpose  = $app.purpose
-        homepage = $app.homepage
-        version  = $app.version
-        manifest = $app.manifest
+        id         = $app.id
+        name       = $app.name
+        category   = $app.category
+        star       = $app.star
+        purpose    = $app.purpose
+        homepage   = $app.homepage
+        version    = $app.version
+        manifest   = $app.manifest
+        collection = $app.collection
     }
     if ($app.note) {
         $record['note'] = $app.note

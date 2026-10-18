@@ -553,11 +553,30 @@ main {
     border-top: 1px solid var(--border);
 }
 
+.card__meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+}
+
 .card__cat {
     font-size: 0.76rem;
     color: var(--faint);
     text-transform: uppercase;
     letter-spacing: 0.07em;
+}
+
+.card__official {
+    flex: none;
+    padding: 2px 8px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #14161f;
+    background: var(--yellow);
+    border-radius: 999px;
 }
 
 .card__actions {
