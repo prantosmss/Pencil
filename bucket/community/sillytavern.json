@@ -1,12 +1,12 @@
 {
-    "version": "1.19.0",
+    "version": "1.19.1",
     "description": "Locally installed LLM frontend for chatting with AI models (with local CLIP Skip = 0 patch)",
     "homepage": "https://github.com/SillyTavern/SillyTavern",
     "license": "AGPL-3.0-only",
     "depends": "nodejs-lts",
-    "url": "https://github.com/SillyTavern/SillyTavern/archive/refs/tags/1.19.0.zip",
-    "hash": "19f34009d55d4e2dd394ce9d6dd6e5d1b0e5b9e5d57df8b5aa325a44c18969be",
-    "extract_dir": "SillyTavern-1.19.0",
+    "url": "https://github.com/SillyTavern/SillyTavern/archive/refs/tags/1.19.1.zip",
+    "hash": "22dfde5b0476dcefba9ca05eaea6670528c3a810db214f17fcb0d6c259588530",
+    "extract_dir": "SillyTavern-1.19.1",
     "pre_install": [
         "New-Item -ItemType Directory -Force \"$persist_dir\" | Out-Null",
         "Set-Content \"$dir\\sillytavern.cmd\" -Encoding Ascii -Value @('@echo off', 'set NODE_ENV=production', ('node \"%~dp0server.js\" --configPath \"{0}\\config.yaml\" --dataRoot \"{0}\\data\" %*' -f $persist_dir))",
